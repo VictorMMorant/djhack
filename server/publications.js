@@ -1,6 +1,6 @@
 Meteor.publish("party", function(partyId) {
 	if(partyId) {
-		Parties.findOne(partyId);
+		return Parties.findOne(partyId);
 	} else {
 		this.ready();
 	}
@@ -9,7 +9,7 @@ Meteor.publish("party", function(partyId) {
 Meteor.publish("songs", function(partyId){
 	
 	if(partyId) {
-		Songs.find({ partyId: partyId, archived : { $exists : false }});
+		return Songs.find({ partyId: partyId, archived: false });
 
 	} else {
 		this.ready();
@@ -24,7 +24,7 @@ Meteor.publish("votes", function( partyId, userId){
 			return song._id;
 		});
 
-		Votes.find({ songId: {$in : songs }, userId: userId});
+		return Votes.find({ songId: {$in : songs }, userId: userId});
 
 	} else {
 		this.ready();

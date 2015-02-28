@@ -14,9 +14,11 @@
 <template name="song">
 	<li>
 		<a href="#" class="upvoted" id="{{_id}}">Upvote</a>
-		<a href="#" class="downvoted" id"{{_id}}">Downvote</a>
-		{{thumbnails}}
-		{{title}}
-		{{artist}}
+		<a href="#" class="downvoted" id="{{_id}}">Downvote</a>
+		
+		<span>{{title}}</span>
+		<span>{{description}}</span>
+		<img src="{{thumbnail}}" id="thumbnail" />
+		
 	</li>
 </template>

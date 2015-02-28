@@ -7,7 +7,6 @@ Songs.allow({
 	},
 	update: function(userId, doc ,fields,modifier) {
 		check(doc.songId, ObjectId);
-		//return Votes.findOne({ songId: doc.songId, userId: Session.get("userId") });
 		return false;
 	},
 	remove: function(userId, doc) {
@@ -20,11 +19,12 @@ Songs.allow({
 {
 	_id,
 	partyId,
-	youtubeId,
+	//youtubeId,
 	archived,
 	title,
-	artist,
-	thumbnails,
+	description,
+	//artist,
+	thumbnail,
 	isPlaying,
 	alreadyPlayed,
 	createdAt,

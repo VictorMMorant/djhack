@@ -14,10 +14,12 @@
 
 <template name="youtubeSong">
 	<li class="song">
-		<!--Song-->
-		<span id="title"></span>
-		<img src="" id="thumbnail"></img>
-		<span id="youtubeId"></span>
-		<span id="title"></span>
+		<span id="spanTitle">{{snippet.title}}</span>
+		<span id="spanDescription">{{snippet.description}}</span>
+		<img src="{{snippet.thumbnails.default.url}}" id="thumbnail" />
+
+		<input type="hidden" id="title" value="{{snippet.title}}"/>
+		<input type="hidden" id="description" value="{{snippet.description}}"/>
+		<input type="hidden" id="youtubeId" value="{{id.videoId}}"/>
 	</li>
 </template>

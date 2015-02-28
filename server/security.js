@@ -39,27 +39,45 @@ Meteor.methods({
 
 	},
 	vote : function(userId, songId, vote) {
-		check(userId, Object);
-		check(songId, Object);
+		
+		check(userId, String);
+		check(songId, String);
 		check(vote, Number);
 
 		var song = Songs.findOne(songId);
 		var voted = Votes.findOne({ userId: userId, songId: songId});
-		var upvoted = vote > 0  ? true : false;
+		var boolUpvoted = vote > 0;
 
-		if(song && !!voted) {
-			Song.update(songId,{votesCount : {$inc : vote}, updatedAt: new Date()});
-			Votes.insert({songId: songId, userId: userId, createdAt: new Date(), upvoted: upvoted});
+		if(song && !voted) {
+			
+			Songs.update(songId,{ $set: { updatedAt: new Date()}, votesCount : {$inc : parseInt(vote)} });
+			
+			Votes.insert({songId: songId, userId: userId, createdAt: new Date(), upvoted: boolUpvoted});
+			return "ok";
 		} else {
 			//  Error Voting !
 			throw new Meteor.Error("votingError","There is an error processing the vote.");
 		}
 	},
-	addSong : function(title, thumbnail, youtubeId) {
+	addSong : function(userId, partyId, youtubeId, title, description, thumbnail) {	
+		check(userId, String);
+		check(partyId, String);
+		check(youtubeId, String);
 		check(title, String);
+		check(description, String);
 		check(thumbnail, String);
 
+		var song = Songs.findOne({ youtubeId: youtubeId});
+		if(song) {
+			//Upvote it
+			Meteor.call("vote",userId,song._id,1); // NO Callback synchronous
 
+		} else {
+			//Add it
+			var songId = Songs.insert({ partyId: partyId, youtubeId: youtubeId, title: title, description: description, thumbnail: thumbnail, archived: false, isPlaying: false,
+					alreadyPlayed: false, createdAt: new Date(), updatedAt: new Date(), votesCount: 0});
+
+		}
 
 	}
 });

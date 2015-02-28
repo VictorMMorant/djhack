@@ -1,6 +1,6 @@
 Template.client.helpers({
 	songs : function() {
-		return Songs.find({ partyId: Session.get("partyId"), archived : { $exists : false }});
+		return Songs.find({ partyId: Session.get("partyId"), archived: false});
 	}
 });
 
