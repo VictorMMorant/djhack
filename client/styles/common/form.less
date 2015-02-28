@@ -1,0 +1,35 @@
+@import "variables.less";
+
+.form {
+  width: 100%;
+
+  .form-button {
+    width: 90%;
+    margin-left:5%;
+    margin-top: 1em;
+  }
+
+  input[type="search"], input[type="email"], input[type="password"], input[type="text"], input[type="number"], textarea, select {
+    width: 90%;
+    margin-left:5%;
+    margin-top: 1em;
+    padding: 0.7em 1em;
+    //.transition(all @time-factor*0.30s ease-in-out);
+    outline: none;
+    border: 2px solid currentColor;
+    border-radius: 0;
+    background: transparent;
+    .shadow(none)
+  }
+
+  .error-form {
+    width: 90%;
+    margin: 0 5%;
+    height:0px;
+    visibility: hidden;
+    opacity: 0;
+    color: @error-color;
+    text-shadow: none;
+    .transition;
+  }
+}

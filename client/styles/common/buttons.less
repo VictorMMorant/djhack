@@ -1,0 +1,31 @@
+@import "variables.less";
+
+.button {
+  border: 2px solid currentColor;
+  border-radius: 0;
+  padding: 0.7em 1em;
+  margin-top: 10px;
+  margin-left: 10px;
+  color: @inverse-color;
+  background: transparent;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  .transition;
+  -webkit-tap-highlight-color: transparent;
+
+  &.secondary {
+    background: @secondary-color;
+    color: @primary-color;
+  }
+
+  &.caution {
+    background: @caution-color;
+    color: @primary-color;
+  }
+
+  &.error {
+    background: @error-color;
+    color: @primary-color;
+  }
+}
