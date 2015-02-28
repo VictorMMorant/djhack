@@ -13,5 +13,8 @@ UI.body.helpers({
 	},
 	pageClient: function() {
 		return Session.get("page") === "client";
+	},
+	pageAddSong: function() {
+		return Session.get("page") === "addSong";
 	}
 });

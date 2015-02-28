@@ -37,6 +37,29 @@ Meteor.methods({
 
 		}
 
-	}
+	},
+	vote : function(userId, songId, vote) {
+		check(userId, Object);
+		check(songId, Object);
+		check(vote, Number);
 
+		var song = Songs.findOne(songId);
+		var voted = Votes.findOne({ userId: userId, songId: songId});
+		var upvoted = vote > 0  ? true : false;
+
+		if(song && !!voted) {
+			Song.update(songId,{votesCount : {$inc : vote}, updatedAt: new Date()});
+			Votes.insert({songId: songId, userId: userId, createdAt: new Date(), upvoted: upvoted});
+		} else {
+			//  Error Voting !
+			throw new Meteor.Error("votingError","There is an error processing the vote.");
+		}
+	},
+	addSong : function(title, thumbnail, youtubeId) {
+		check(title, String);
+		check(thumbnail, String);
+
+
+
+	}
 });

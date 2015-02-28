@@ -6,6 +6,8 @@ Songs.allow({
 		return !Songs.findOne({ partyId : doc.partyId, archived: { $exists : false }});	
 	},
 	update: function(userId, doc ,fields,modifier) {
+		check(doc.songId, ObjectId);
+		//return Votes.findOne({ songId: doc.songId, userId: Session.get("userId") });
 		return false;
 	},
 	remove: function(userId, doc) {
@@ -18,15 +20,16 @@ Songs.allow({
 {
 	_id,
 	partyId,
+	youtubeId,
 	archived,
-	name,
+	title,
 	artist,
 	thumbnails,
 	isPlaying,
 	alreadyPlayed,
 	createdAt,
 	updatedAt,
-	votesCount,
+	votesCount
 
 }
 

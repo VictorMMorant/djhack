@@ -1,3 +1,22 @@
 <template name="client">
 	<h1>Client</h1>
+	<a href="" id="addSong" >Add Song</a>
+	<ul>
+		{{#each songs}}
+			{{> song}}
+		{{else}}
+			<li> There is no songs yet ! Add one !</li>
+		{{/each}}
+
+	</ul>
+</template>
+
+<template name="song">
+	<li>
+		<a href="#" class="upvoted" id="{{_id}}">Upvote</a>
+		<a href="#" class="downvoted" id"{{_id}}">Downvote</a>
+		{{thumbnails}}
+		{{title}}
+		{{artist}}
+	</li>
 </template>

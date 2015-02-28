@@ -1,3 +1,23 @@
 <template name="addSong">
 	<h1>Add Song</h1>
+	<form id="addSong">
+		<input type="text" id="query" placeholder="Search..." />
+		<ul>
+		{{#each youtubeSongs}}
+			{{> youtubeSong}}
+		{{else}}
+			<li>No results found !</li>
+		{{/each}}
+		</ul>
+	</form>
+</template>
+
+<template name="youtubeSong">
+	<li class="song">
+		<!--Song-->
+		<span id="title"></span>
+		<img src="" id="thumbnail"></img>
+		<span id="youtubeId"></span>
+		<span id="title"></span>
+	</li>
 </template>
