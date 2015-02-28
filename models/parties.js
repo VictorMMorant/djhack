@@ -19,7 +19,6 @@ Parties.allow({
 	_id,
 	name,
 	slugName,
-	username,
 	password,
 	createdAt,
 	connectionId
