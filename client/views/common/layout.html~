@@ -3,6 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
+
 <body>
 	{{#if pageClient}}
 		{{> client}}
@@ -15,10 +16,8 @@
 	{{else}}
 		{{> home}}
 	{{/if}}{{/if}}{{/if}}{{/if}}
-
-{{> afterBody}}
+<<<<<<< HEAD
 </body>	
-
-<template name="afterBody">
-    {{gapi}}
-</template>
+=======
+</body>
+>>>>>>> ce0aff9a82ccec8ce9b87ade71e5bc5ba43ea4a4

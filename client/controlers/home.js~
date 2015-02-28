@@ -3,6 +3,8 @@ UI.body.rendered = function(){
 }
 
 Template.home.helpers({
+	
+
 
 });
 

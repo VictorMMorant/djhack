@@ -4,7 +4,7 @@
 
     <form id="createParty" class="form">
       <input type="text" id="partyName" placeholder="Party Name" />
-      <input type="password" id="partyPassword" placeholder="Party Password" />
+      <input type="text" id="partyPassword" placeholder="Party Password" />
       <button type="submit" class="button form-button">Go!</button>
     </form>
   </div>
