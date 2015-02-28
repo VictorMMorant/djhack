@@ -1,13 +1,25 @@
 <template name="home">
-	<h1>Welcome to Dj Hack</h1>
-	<a class="create" href="#">Create a party!</a> 
-	<form id="join">
-		<input type="text" id="partyName"/>
-		<input type="submit" />
-	</form>
-	<div class="steps">
-		<div>1) Create a party !</div>
-		<div>2) Invite your friends !</div>
-		<div>3) Vote the songs !</div>
-	</div>
+  <div class="home">
+    <header>
+      <h1>Welcome to Dj Hack</h1>
+      <div class="cta">
+        <div class="cta-first">
+          <button class="create button">Create a party!</button>
+        </div>
+        <form id="join" class="cta-second">
+          <input type="text" id="partyName" placeholder="Or join an existing one!" />
+          <input type="submit" class="hide" />
+        </form>
+      </div>
+      <div class="scroll-indicator"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><path d="M48 62c-0.332 0-0.66-0.084-0.956-0.248l-44-24c-0.968-0.524-1.328-1.74-0.796-2.712 0.528-0.968 1.752-1.328 2.712-0.8l43.040 23.48 43.044-23.48c0.968-0.528 2.188-0.168 2.716 0.8 0.528 0.972 0.172 2.184-0.8 2.712l-44 24c-0.3 0.164-0.628 0.248-0.96 0.248z" fill="#FFF"/></svg></div>
+    </header>
+    <div class="content">
+
+      <div class="steps">
+        <div>1) Create a party !</div>
+        <div>2) Invite your friends !</div>
+        <div>3) Vote the songs !</div>
+      </div>
+    </div>
+  </div>
 </template>

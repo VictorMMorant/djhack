@@ -1,0 +1,55 @@
+@import "variables.less";
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    box-sizing:         border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: 22px;
+  .gradient;
+  .animation(hue 60s infinite linear);
+  color: @inverse-color;
+}
+
+.clearfix {
+  clear: both;
+}
+
+a {
+  text-decoration: none;
+  color: @primary-color;
+  cursor: pointer;
+}
+
+a:active, a:hover {
+  text-decoration: underline;
+}
+
+.inverse {
+  color: @secondary-color;
+}
+
+.hide {
+  display: none !important;
+}
+
+.go-up {
+  .animation(up @time-factor*1290ms linear both);
+}
+
+.leave-down {
+  .animation(down @time-factor*500ms linear forwards);
+}
+
+hr {
+  clear: both;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0px solid @primary-color;
+  border-bottom: 1px solid #e1e4e6;
+}

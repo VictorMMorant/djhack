@@ -1,0 +1,80 @@
+@import "common/variables.less";
+h1 {
+  padding-top: 2em;
+  margin: 0;
+  text-align: center;
+  font-weight: 100;
+}
+
+.home {
+  height: 100%;
+  overflow-y: auto;
+  header {
+    height: 100%;
+    width: 100%;
+    .cta {
+      margin-top: 60vh;
+      width: 100%;
+      .cta-first, .cta-second {
+        float: left;
+        width: 50%;
+      }
+      .cta-first {
+        .button {
+          width: 300px;
+          margin-right: 2em;
+          float: right;
+          color: @inverse-color;
+          background: transparent;
+        }
+      }
+      .cta-second {
+        #partyName {
+          border: 2px solid currentColor;
+          border-radius: 0;
+          padding: 0.7em 1em;
+          margin-top: 10px;
+          margin-left: 2em;
+          background: transparent;
+          color: @inverse-color;
+          text-decoration: none;
+          text-align: center;
+          cursor: pointer;
+          .transition;
+          -webkit-tap-highlight-color: transparent;
+          &::-webkit-input-placeholder {
+            /* WebKit browsers */
+
+            color: @inverse-color;
+          }
+          &:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+
+            color: @inverse-color;
+          }
+          &::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+
+            color: @inverse-color;
+          }
+          &:-ms-input-placeholder {
+            /* Internet Explorer 10+ */
+
+            color: @inverse-color;
+          }
+        }
+      }
+    }
+    .scroll-indicator {
+      svg {
+        margin-top: 2em;
+        margin-left: ~"calc(50% - 25px)";
+        width: 50px;
+      }
+    }
+  }
+  .content {
+    background: #FFF;
+    color: @darkDarkgray;
+  }
+}
