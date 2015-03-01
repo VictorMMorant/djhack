@@ -56,7 +56,7 @@ Meteor.methods({
 			return "ok";
 		} else {
 			//  Error Voting !
-			throw new Meteor.Error("votingError","There is an error processing the vote.");
+			throw new Meteor.Error("votingError", "You already have voted.");
 		}
 	},
 	addSong : function(userId, partyId, youtubeId, title, description, thumbnail) {	
@@ -70,14 +70,23 @@ Meteor.methods({
 		var song = Songs.findOne({ youtubeId: youtubeId});
 		if(song) {
 			//Upvote it
-			Meteor.call("vote",userId,song._id,1); // NO Callback synchronous
-
+			return Meteor.call("vote",userId,song._id,1); // NO Callback synchronous
 		} else {
 			//Add it
-			var songId = Songs.insert({ partyId: partyId, youtubeId: youtubeId, title: title, description: description, thumbnail: thumbnail, archived: false, isPlaying: false,
-					alreadyPlayed: false, createdAt: new Date(), updatedAt: new Date(), votesCount: 0});
-
+			var songId = Songs.insert({
+              partyId: partyId,
+              youtubeId: youtubeId,
+              title: title,
+              description: description,
+              thumbnail: thumbnail,
+              archived: false,
+              isPlaying: false,
+		      alreadyPlayed: false,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              votesCount: 0
+            });
+            return songId;
 		}
-
 	}
 });
