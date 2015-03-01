@@ -38,7 +38,7 @@ var apiCall = function () {
           }
         });
 
-          console.log(newArr);
+//          console.log(newArr);
           songsList.set(newArr);
 
       });

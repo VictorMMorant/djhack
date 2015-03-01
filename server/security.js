@@ -55,7 +55,7 @@ Meteor.methods({
 			Votes.insert({songId: songId, userId: userId, createdAt: new Date(), upvoted: boolUpvoted});
 			return "ok";
 		} else {
-			//  Error Voting !
+			//  Err.0or Voting !
 			throw new Meteor.Error("votingError", "You already have voted.");
 		}
 	},
