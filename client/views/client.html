@@ -4,7 +4,7 @@
     {{#each songs}}
       {{> song}}
     {{else}}
-      <li class="song"> There is no songs yet ! Add one !</li>
+      <li class="song"><div class="container"><p>There is no songs yet ! Add one !</p></div></li>
     {{/each}}
 
   </ul>
@@ -12,7 +12,7 @@
 </template>
 
 <template name="song">
-	<li class="song">
+	<li class="song{{#if swipable}} swipable{{/if}}">
       <img src="{{thumbnail}}" />
       <div class="container"><p>{{title}}</p></div>
       <a href="#" class="upvoted" id="{{_id}}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M49.999,91.46c3.944-3.943,26.458-26.47,40.533-40.543c12.61-12.611,12.341-30.992,0.876-42.395 C79.943-2.884,61.404-2.834,49.999,8.632C38.595-2.834,20.056-2.884,8.591,8.522C-2.874,19.925-3.142,38.306,9.467,50.917 C23.541,64.99,46.058,87.517,49.999,91.46z"/></svg></a>
