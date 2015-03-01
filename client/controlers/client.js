@@ -2,6 +2,9 @@ Template.client.helpers({
 	songs : function() {
 		return Songs.find({ partyId: Session.get("partyId"), archived: false, alreadyPlayed: false }, {sort:[["votesCount", "desc"]]}).map(function(song) {
           song.swipable = !song.isPlaying && !Votes.findOne({userId: Session.get('userId'), songId: song._id});
+          song.width = Math.min(50, Math.abs(song.votesCount) / 15);
+          song.left = song.votesCount < 0 ? 50 - song.width : 50;
+          song.left = song.votesCount < 0 ? "#ED5565" : "#A0D468";
           return song;
         });
 	}
@@ -10,7 +13,6 @@ Template.client.helpers({
 Template.client.events({
 	"click #addSong" : function(e) {
 		e.preventDefault();
-
 		Session.set("page", "addSong");
 	}
 });
@@ -20,7 +22,7 @@ Template.song.events({
 		e.preventDefault();		
 		var userId = Session.get("userId");
 		var songId = e.currentTarget.id;
-		Meteor.call("vote", userId, songId, 1, function(error, result){
+		Meteor.call("vote", userId, songId, 1, function(error){
 			if(error)
 		      console.log("Can't upvote the song", error);
             $(t.find(".song")).removeClass("swiped");
@@ -31,7 +33,7 @@ Template.song.events({
 		e.preventDefault();
 		var userId = Session.get("userId");
 		var songId = e.currentTarget.id;
-		Meteor.call("vote", userId, songId, -1, function(error, result){
+		Meteor.call("vote", userId, songId, -1, function(error){
 			if(error)
 		      console.log("Can't downvote the song", error);
             $(t.find(".song")).removeClass("swiped");
