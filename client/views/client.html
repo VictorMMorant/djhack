@@ -1,13 +1,13 @@
 <template name="client">
-
-  <ul class="songs-list">
-    {{#each songs}}
-      {{> song}}
-    {{else}}
-      <li class="song"><div class="container"><p>There is no songs yet ! Add one !</p></div></li>
-    {{/each}}
-
-  </ul>
+  <div class="wrapper">
+    <ul class="songs-list">
+      {{#each songs}}
+        {{> song}}
+      {{else}}
+        <li class="song"><div class="container"><p>There is no songs yet ! Add one !</p></div></li>
+      {{/each}}
+    </ul>
+  </div>
   <button id="addSong" class="circle-button"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100"><polygon points="100,37.5 62.5,37.5 62.5,0 37.5,0 37.5,37.5 0,37.5 0,62.5 37.5,62.5 37.5,100 62.5,100   62.5,62.5 100,62.5 "/></svg></button>
 </template>
 

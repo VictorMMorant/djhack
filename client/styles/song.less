@@ -1,4 +1,7 @@
 @import "common/variables.less";
+.add-song-title {
+  padding-top: 0.5em;
+}
 
 #addSong.circle-button {
   position: absolute;
@@ -6,6 +9,7 @@
   right: 10px;
   .transition;
   fill: currentColor;
+  .animation(hue 60s infinite linear);
   svg {
     width: 50%;
   }
