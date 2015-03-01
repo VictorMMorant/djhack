@@ -42,7 +42,7 @@ if (!Session.get("currentSongId") && song) {
 
 var handlePlaying = function () {
   var yt_id = Session.get('videoId');
-  if (yt.ready() && Session.get('isPlaying')) {
+  if (yt_id && yt.ready() && Session.get('isPlaying')) {
     yt.player.setPlaybackQuality('small');
     yt.player.loadVideoById(yt_id);
     Meteor.call('playing', Session.get('partyId'), Session.get('currentSongId'));
@@ -67,7 +67,7 @@ String.prototype.toHHMMSS = function () {
     if (seconds < 10) {seconds = "0"+seconds;}
     var time    = minutes+':'+seconds;
     return time;
-}
+};
 
 var updateTimer = function () {
   setInterval(function(){
@@ -84,7 +84,7 @@ function onPlayerStateChange(event) {
         Session.set('isPlaying', true);
         break;
       case YT.PlayerState.PAUSED:
-        Session.set('isPlaying', false);
+        //Session.set('isPlaying', false);
         break;
       case YT.PlayerState.ENDED:
         Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err, result) {
