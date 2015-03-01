@@ -31,11 +31,12 @@ Template.server.events({
   },
   'click #forward': function () {
     //Skip to the next song
-    Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err, result) {
+    Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err) {
         if (err) console.log(err);
         else {
           //Reload iframe with new youtube video id 
           Session.set('currentSongId', null);
+          Session.set('videoId', null);
         }
       });
   },
