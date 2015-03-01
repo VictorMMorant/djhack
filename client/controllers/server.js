@@ -31,11 +31,27 @@ Template.server.events({
   },
   'click #forward': function () {
     //Skip to the next song
-    Meteor.call('alreadyPlayed', Session.get('currentSongId'), function (err, result) {
+    Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err, result) {
         if (err) console.log(err);
         else {
           //Reload iframe with new youtube video id 
           Session.set('currentSongId', null);
+        }
+      });
+  },
+  'click .reset': function () {
+    //archived all the songs
+    Meteor.call('archive', Session.get('partyId'), function (err) {
+        if (err) console.log(err);
+        else {
+          //Reload iframe with new youtube video id
+          Session.set('currentSongId', null);
+          if(yt)
+          {
+            if(Session.get('isPlaying'))
+              yt.player.pauseVideo();
+            Session.set('isPlaying', false);
+          }
         }
       });
   }

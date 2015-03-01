@@ -89,16 +89,35 @@ Meteor.methods({
             return songId;
 		}
 	},
-  playing : function(currentSongId) {
+  playing : function(partyId, currentSongId) {
+    check(partyId, String);
     check(currentSongId, String);
-    Songs.update(currentSongId, { $set : { isPlaying : true} });
-
-
+    if (this.connection.id === Parties.findOne(partyId).connectionId) {
+      Songs.update(currentSongId, { $set : { isPlaying : true} });
+    } else {
+      throw new Meteor.Error("connectionError","Seems like your trying to hack!");
+    }
   },
-  alreadyPlayed : function(currentSongId) {
+  alreadyPlayed : function(partyId, currentSongId) {
+    check(partyId, String);
     check(currentSongId, String);
-    Songs.update(currentSongId, { $set : { isPlaying: false, alreadyPlayed : true} });
-    
-    
+    if (this.connection.id === Parties.findOne(partyId).connectionId) {
+      Songs.update(currentSongId, { $set : { isPlaying: false, alreadyPlayed : true} });
+    } else {
+      throw new Meteor.Error("connectionError","Seems like your trying to hack!");
+    }
+  },
+  archive : function(partyId) {
+    check(partyId, String);
+    if (this.connection.id === Parties.findOne(partyId).connectionId) {
+      Songs.update({partyId: partyId, archived: false}, { $set : { isPlaying: false, alreadyPlayed : false, archived: new Date()} });
+      var songsId = Songs.find({partyId: partyId}).map(function(song) {
+        return song._id;
+      });
+      Votes.remove({songId: {$in: songsId}});
+      return "ok";
+    } else {
+      throw new Meteor.Error("connectionError","Seems like your trying to hack!");
+    }
   }
 });

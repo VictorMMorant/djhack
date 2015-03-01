@@ -45,7 +45,7 @@ var handlePlaying = function () {
   if (yt.ready() && Session.get('isPlaying')) {
     yt.player.setPlaybackQuality('small');
     yt.player.loadVideoById(yt_id);
-    Meteor.call('playing', Session.get('currentSongId'));
+    Meteor.call('playing', Session.get('partyId'), Session.get('currentSongId'));
   }
 };
 
@@ -87,7 +87,7 @@ function onPlayerStateChange(event) {
         Session.set('isPlaying', false);
         break;
       case YT.PlayerState.ENDED:
-        Meteor.call('alreadyPlayed', Session.get('currentSongId'), function (err, result) {
+        Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err, result) {
           if(err) console.log(err);
           else{
             //Reload iframe with new youtube video id 

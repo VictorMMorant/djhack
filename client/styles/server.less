@@ -1,3 +1,5 @@
+@import "common/variables.less";
+
 .player {
 
   #play, #forward {
@@ -25,4 +27,28 @@
 
 #qr-code {
   margin-left:~"calc(50% - 128px)";
+}
+
+.reset {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  .transition;
+  fill: currentColor;
+  .animation(hue 60s infinite linear);
+  cursor: pointer;
+  svg {
+    width: 44px;
+    margin-bottom: -13px;
+  }
+  span {
+    opacity: 0;
+    padding-left: 10px;
+    .transition;
+  }
+  &:hover {
+    span {
+      opacity: 1;
+    }
+  }
 }
