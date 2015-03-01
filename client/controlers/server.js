@@ -18,8 +18,13 @@ Template.server.helpers({
 
 Template.server.events({
   'click #play': function () {
+    if(yt)
+    {
+      if(Session.get('isPlaying'))
+        yt.player.pauseVideo();
+      else yt.player.playVideo();
+    }
     Session.set('isPlaying', !Session.get('isPlaying'));
-    //Call toggle of YT iframe
   },
   'click #forward': function () {
     //Skip to the next song

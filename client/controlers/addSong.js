@@ -20,6 +20,7 @@ var apiCall = function () {
       var request = gapi.client.youtube.search.list({
         q: Session.get("query"),
         part: 'snippet',
+        type: 'video',
         fields: 'items(id,snippet)',
         key: 'AIzaSyBt0EpIzbUteYvSET-nkDBX2fJgpC6xRfY'
       });

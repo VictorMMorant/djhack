@@ -66,7 +66,7 @@ Meteor.methods({
 		check(title, String);
 		check(thumbnail, String);
 
-		var song = Songs.findOne({ youtubeId: youtubeId});
+		var song = Songs.findOne({ youtubeId : youtubeId, partyId : partyId, archived : false});
 
 		if(song) {
 			//Upvote it
