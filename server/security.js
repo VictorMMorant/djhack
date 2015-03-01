@@ -6,7 +6,8 @@ Meteor.methods({
 		if(party) {
 			return party._id;
 		} else {
-			throw new Meteor.Error("joinPartyError", "No party found");
+          var up = new Meteor.Error("joinPartyError", "No party found");
+			throw up;
 		}
 	},
 	createParty : function(partyName, partyPassword) {
