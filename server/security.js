@@ -50,7 +50,7 @@ Meteor.methods({
 
 		if(song && !voted) {
 			
-			Songs.update(songId,{ $set: { updatedAt: new Date()}, votesCount : {$inc : parseInt(vote)} });
+			Songs.update(songId,{ $set: { updatedAt: new Date()}, $inc : {votesCount : parseInt(vote)} });
 			
 			Votes.insert({songId: songId, userId: userId, createdAt: new Date(), upvoted: boolUpvoted});
 			return "ok";

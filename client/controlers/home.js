@@ -1,9 +1,8 @@
-UI.body.rendered = function(){
-  $('body').append('<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>');
-}
-
-Template.home.helpers({
-
+UI.body.helpers({
+  gapi: function() {
+    $('body').append('<script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>');
+    return "";
+  }
 });
 
 Template.home.events({

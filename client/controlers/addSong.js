@@ -73,6 +73,7 @@ Template.addSong.events({
       if (error) {
         console.log("Can't add the song", error);
       } else {
+        Session.set("query", null);
         Session.set("page", "client");
       }
     });
