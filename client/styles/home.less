@@ -13,11 +13,17 @@ h1 {
     height: 100%;
     width: 100%;
     .cta {
-      margin-top: 60vh;
+      margin-top: ~"calc(72vh - 140px)";
       width: 100%;
+      @media only screen and (max-width : 730px) {
+          margin-top: ~"calc(60vh - 140px)";
+      }
       .cta-first, .cta-second {
         float: left;
         width: 50%;
+        @media only screen and (max-width : 730px) {
+          width: 100%;
+        }
       }
       .cta-first {
         .button {
@@ -26,6 +32,11 @@ h1 {
           float: right;
           color: @inverse-color;
           background: transparent;
+
+          @media only screen and (max-width : 730px) {
+            width: 80%%;
+            margin-right: 10%;
+          }
         }
       }
       .cta-second {
@@ -61,6 +72,11 @@ h1 {
             /* Internet Explorer 10+ */
 
             color: @inverse-color;
+          }
+
+          @media only screen and (max-width : 730px) {
+            width: 80%%;
+            margin-left: 10%;
           }
         }
       }
