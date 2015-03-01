@@ -23,6 +23,16 @@
       </div>
     </header>
     <div class="content">
+      <div class="bs">
+        <h1>DJ 2.0</h1>
+        <h4>An open source, multi-platform, and collaborative service to create playlists and play music with your friends</h4>
+        <h3>What does it do?</h3>
+        <p>DJ 2.0 provides a distributed social service where the users create the playlists with the music they want to hear. It takes 2 simple steps to create an event and begin to add music. The tracks are ranked based on user popularity by voting for your favorite tracks before they are played. This innovative system will ensure you and your friends have a blast wherever you go.</p>
+        <h3>A little bit of backstory</h3>
+        <p>DJ 2.0 came as an idea for the HackLondon hackathon in an attempt to revolutionize the way parties should be experienced. Long gone are the times of DJs choosing what music is played and which are not. In the 21st century it only makes sense that the community is the one in charge of choosing what they want to hear. With DJ 2.0 we put the power of the selection of music in the hands of the users, where it rightfully belongs. The application supports the creation of different "party" events and allows the attendees to jointly select their preferred tracks.</p>
+        <h3>How does it work?</h3>
+        <p>Developed with Meteor JS, the application boasts of a responsive design fit for all mobile devices, tablets, and computers alike. With native support for full stack reactivity, a track added by a user is automatically synced among the rest of connected users in realtime.</p>
+      </div>
       <div class="feature">
         <div class="image"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="74.81" y="46.146" width="4.721" height="8.373"/><rect x="80.304" y="46.146" width="4.719" height="8.373"/><polygon points="69.983,55.428 68.39,55.428 68.39,45.238 69.983,45.238 69.983,46.146 73.905,46.146 73.905,54.52 69.983,54.52 "/><path d="M92.772,50.334"/><path d="M87.325,50.334"/><path d="M87.325,50.334"/><polygon points="92.855,46.147 95.605,48.239 95.605,52.429 92.855,54.521 92.772,54.52 87.325,53.535 87.325,54.52 85.731,54.52   85.731,46.146 87.325,46.146 87.325,47.131 92.772,46.146 "/><path d="M41.397,50.334"/><path d="M41.397,58.334c0,0-3.924,0.375-3.924-3.25h-0.192l-8.797-0.002v-3.898c-1.928,0.062-5.947-0.875-9.072-4.103  c-3.125-3.229-7.396-3.229-8.812-2.812s-6.625,0.5-7.417,0.354s-0.063-1.729,0.895-1.416s3.792-0.125,6.396-0.479  s6.958-0.792,10.333,2.98s7.677,3.687,7.677,3.687v-3.809h8.797h0.192c0-3.625,3.924-3.25,3.924-3.25l0.29-0.011l25.706,0.011v16  l-25.539,0.011L41.397,58.334z"/><line x1="67.394" y1="42.334" x2="67.394" y2="58.334"/></svg></div>
         <div class="text">Plug your device to a sound system. Create a <em>Party</em>.</div>
@@ -60,6 +70,21 @@
         <div class="text">Listen to the music !</div>
       </div>
       <div class="clearfix"></div>
+      <div class="team">
+        <h2>Made <span class="joke">with ♡<span> (and sleep-deprivation)</span></span> by</h2>
+        {{#each members}}
+        <div class="member">
+          <img src="{{imageBlack}}">
+          <img src="{{image}}" class="color">
+          <h2>{{name}}</h2>
+          <div class="social">
+            <a href="{{facebook}}" class="facebook" target="_blank"><span></span></a>
+            <a href="{{twitter}}" class="twitter" target="_blank"><span></span></a>
+            <a href="{{linkedin}}" class="linkedin" target="_blank"><span></span></a>
+          </div>
+        </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,4 @@
 @import "common/variables.less";
-
 h1 {
   padding-top: 2em;
   margin: 0;
@@ -96,6 +95,101 @@ h1 {
     color: @darkDarkgray;
     padding-top: 50px;
     padding-bottom: 50px;
+    .shadow;
+
+    .bs {
+      padding: 0 2em;
+    }
+
+    .team {
+      border-top: 1px solid @darkLightgray;
+      margin-top: 2em;
+      padding-top: 2em;
+
+      h2 {
+        text-align: center;
+        .joke {
+          span {
+            overflow: hidden;
+            width: 0;
+            display: inline-block;
+            white-space: nowrap;
+            .transition;
+          }
+
+          &:hover {
+            span {
+              text-decoration: none;
+              width: 380px;
+            }
+          }
+        }
+      }
+      .member {
+        width: 25%;
+        float: left;
+        position: relative;
+        img {
+          width: 12.5vw;
+          margin-left: 6.25vw;
+          border-radius: 50%;
+          position: absolute;
+
+          &.color {
+            opacity: 0;
+            .transition;
+
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+
+        h2 {
+          font-size: 1em;
+          margin-top: 13vw;
+          color: @inverse-color;
+        }
+
+        .social {
+          margin-left: ~"calc(50% - 90px)";
+          height: 80px;
+          a {
+            float: left;
+            width: 40px;
+            height: 40px;
+            margin: 0 10px;
+            span {
+              display: inline-block;
+              width: 40px;
+              height: 40px;
+              background: url(/images/sprite_social.png) 0 0 no-repeat;
+            }
+
+            &.facebook span {
+              background-position:0 0;
+              &:hover {
+                background-position:-40px 0;
+              }
+            }
+            &.twitter span {
+              background-position:-80px 0;
+              &:hover {
+                background-position:-120px 0;
+              }
+            }
+            &.linkedin span {
+              background-position:-240px 0;
+              &:hover {
+                background-position:-280px 0;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
     .feature {
       width: 33.33%;
       float: left;
