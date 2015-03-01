@@ -87,5 +87,11 @@ Meteor.methods({
             });
             return songId;
 		}
-	}
+	},
+alreadyPlayed : function(currentSongId) {
+    check(currentSongId, String);
+    Songs.update(currentSongId, { $set : { alreadyPlayed : true} });
+    
+    
+  }
 });
