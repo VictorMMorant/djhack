@@ -9,7 +9,10 @@ Template.client.events({
 		e.preventDefault();
 
 		Session.set("page", "addSong");
-	},
+	}
+});
+
+Template.song.events({
 	"click .upvoted" : function(e, t) {
 		e.preventDefault();		
 		var userId = Session.get("userId");
@@ -30,4 +33,15 @@ Template.client.events({
 			
 		});
 	}
+});
+
+Template.song.gestures({
+  'swipeleft .song': function (e) {
+    e.preventDefault();
+    $(this.find(".song")).addClass("swiped");
+  },
+  'swiperight .song': function (e) {
+    e.preventDefault();
+    $(this.find(".song")).removeClass("swiped");
+  }
 });

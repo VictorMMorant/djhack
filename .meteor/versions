@@ -1,3 +1,4 @@
+aldeed:template-extension@3.1.1
 application-configuration@1.0.4
 autoupdate@1.1.5
 base64@1.0.2
@@ -7,6 +8,7 @@ blaze-tools@1.0.2
 boilerplate-generator@1.0.2
 callback-hook@1.0.2
 check@1.0.4
+chriswessels:hammer@2.0.4_3
 ddp@1.0.14
 deps@1.0.6
 ejson@1.0.5

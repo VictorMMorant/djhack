@@ -24,6 +24,8 @@
     margin-bottom: 0.5em;
     .shadow;
     font-size: 0.75em;
+    .transition;
+    .transform(none);
 
     img {
       -webkit-filter: none;
@@ -42,14 +44,35 @@
       }
     }
 
-    .upvoted {
-      display: none;
+    .upvoted, & .downvoted {
+      display: block;
+      position: absolute;
+      height: 44px;
       width: 44px;
+      right: 5%;
+      z-index: -1;
+      background: @success-color;
+      .animation(none);
+      .translate(0, -44px);
+      fill: @inverse-color;
+    }
+
+    svg {
+      width: 30px;
+      margin: 7px;
     }
 
     .downvoted {
-      display: none;
-      width: 44px;
+      background: @error-color;
+      right: ~"calc(5% + 44px)";
+    }
+
+    &.swiped {
+      .translate(-88px, 0);
+
+      .upvoted, & .downvoted {
+        .translate(133px, -44px);
+      }
     }
   }
 }
