@@ -1,0 +1,55 @@
+@import "common/variables.less";
+
+#addSong.circle-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  .transition;
+  fill: currentColor;
+  svg {
+    width: 50%;
+  }
+}
+.songs-list {
+  margin: 0;
+  margin-top: 1em;
+  padding: 0;
+  .song {
+    list-style: none;
+    width: 90%;
+    height: 44px;
+    margin-left: 5%;
+    background: #FFF;
+    color: @darkDarkgray;
+    margin-bottom: 0.5em;
+    .shadow;
+    font-size: 0.75em;
+
+    img {
+      -webkit-filter: none;
+      filter: none;
+      float: left;
+      height: 44px;
+    }
+    .container {
+      display: table-cell;
+      vertical-align: middle;
+      width: 100%;
+      height: 44px;
+      p {
+        margin: 0;
+        padding-left: 10px;
+      }
+    }
+
+    .upvoted {
+      display: none;
+      width: 44px;
+    }
+
+    .downvoted {
+      display: none;
+      width: 44px;
+    }
+  }
+}

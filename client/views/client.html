@@ -1,23 +1,23 @@
 <template name="client">
-	<h1>Client</h1>
-	<a href="" id="addSong" >Add Song</a>
-	<ul>
-		{{#each songs}}
-			{{> song}}
-		{{else}}
-			<li> There is no songs yet ! Add one !</li>
-		{{/each}}
 
-	</ul>
+  <ul class="songs-list">
+    {{#each songs}}
+      {{> song}}
+    {{else}}
+      <li class="song"> There is no songs yet ! Add one !</li>
+    {{/each}}
+
+  </ul>
+  <button id="addSong" class="circle-button"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100"><polygon points="100,37.5 62.5,37.5 62.5,0 37.5,0 37.5,37.5 0,37.5 0,62.5 37.5,62.5 37.5,100 62.5,100   62.5,62.5 100,62.5 "/></svg></button>
 </template>
 
 <template name="song">
-	<li>
+	<li class="song">
+      <img src="{{thumbnail}}" />
 		<a href="#" class="upvoted" id="{{_id}}">Upvote</a>
 		<a href="#" class="downvoted" id="{{_id}}">Downvote</a>
 		
-		<span>{{title}}</span>
-		<span>{{description}}</span>
-		<img src="{{thumbnail}}" id="thumbnail" />
+		<div class="container"><p>{{title}}</p></div>
+
 	</li>
 </template>

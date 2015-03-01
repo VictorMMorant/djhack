@@ -68,15 +68,16 @@ Template.addSong.events({
     e.preventDefault();
 
     var song = songsList.get()[e.currentTarget.id];
-
-    Meteor.call("addSong", Session.get('userId'), Session.get('partyId'), song.id, song.title, song.image, function (error) {
-      if (error) {
-        console.log("Can't add the song", error);
-      } else {
-        Session.set("query", null);
-        Session.set("page", "client");
-      }
-    });
+    if (song) {
+      Meteor.call("addSong", Session.get('userId'), Session.get('partyId'), song.id, song.title, song.image, function (error) {
+        if (error) {
+          console.log("Can't add the song", error);
+        } else {
+          Session.set("query", null);
+          Session.set("page", "client");
+        }
+      });
+    }
 
   }
 
