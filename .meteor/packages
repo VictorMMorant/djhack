@@ -8,5 +8,6 @@ meteor-platform
 less
 reactive-var
 chriswessels:hammer
-adrianliaw:youtube-iframe-api
 hpx7:youtube-iframe-player
+mrt:qr-scanner
+steeve:jquery-qrcode

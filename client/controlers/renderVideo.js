@@ -13,9 +13,14 @@ Template.server.rendered = function () {
   this.autorun(pickNextSong);
   this.autorun(handlePlaying);
   this.autorun(handlePlayerEvents);
+
+  jQuery('#qr-code').qrcode({
+    text: "http://dj2.meteor.com/#/" + Session.get('partyId')
+  });
 }
 
 var pickNextSong = function () {
+  console.log('pickSong');
   var song = Songs.findOne({
       partyId: Session.get('partyId'),
       archived: false,
@@ -34,11 +39,11 @@ if (!Session.get("currentSongId") && song) {
 };
 
 var handlePlaying = function () {
-  var yt_id = 'xz7usUEPWsc'; //Session.get('videoId')
-  console.log(Session.get('isPlaying'));
+  var yt_id = Session.get('videoId');
   if (yt.ready() && Session.get('isPlaying')) {
     yt.player.setPlaybackQuality('small');
     yt.player.loadVideoById(yt_id);
+    Meteor.call('playing', Session.get('currentSongId'));
   }
 };
 
@@ -58,8 +63,7 @@ function onPlayerStateChange(event) {
         Session.set('isPlaying', false);
         break;
       case YT.PlayerState.ENDED:
-        Meteor.call('alreadyPlayed', Session.get('currentSongId'),
-        function (err, result) {
+        Meteor.call('alreadyPlayed', Session.get('currentSongId'), function (err, result) {
           if(err) console.log(err);
           else{
             //Reload iframe with new youtube video id 

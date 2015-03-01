@@ -1,6 +1,3 @@
-
-
-
 Template.createParty.events({
 	"submit #createParty" : function(e, t) {
 		e.preventDefault();

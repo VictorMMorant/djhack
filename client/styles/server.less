@@ -1,13 +1,22 @@
-#play{
- svg{
-   width : 100px;
-   height : 100px;
- }
+.player {
+
+  #play, #forward {
+    float: left;
+  }
+  #play {
+    margin-left:~"calc(50% - 100px)";
+  }
+  svg {
+    width: 100px;
+    height: 100px;
+    fill: #FFF;
+  }
 }
 
-#forward{
- svg{
-   width : 100px;
-   height : 100px;
- }
+#player {
+  display: none;
+}
+
+#qr-code {
+  margin-left:~"calc(50% - 128px)";
 }
