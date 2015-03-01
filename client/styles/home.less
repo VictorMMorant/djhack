@@ -12,6 +12,7 @@ h1 {
   header {
     height: 100%;
     width: 100%;
+    overflow-y: hidden;
     .cta {
       margin-top: ~"calc(72vh - 140px)";
       width: 100%;
@@ -34,7 +35,7 @@ h1 {
           background: transparent;
 
           @media only screen and (max-width : 730px) {
-            width: 80%%;
+            width: 80%;
             margin-right: 10%;
           }
         }
@@ -75,7 +76,7 @@ h1 {
           }
 
           @media only screen and (max-width : 730px) {
-            width: 80%%;
+            width: 80%;
             margin-left: 10%;
           }
         }
@@ -92,5 +93,32 @@ h1 {
   .content {
     background: #FFF;
     color: @darkDarkgray;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    .feature {
+      width: 33.33%;
+      float: left;
+      @media only screen and (max-width : 600px) {
+        width: 100%;
+      }
+      .image {
+        width: 70%;
+        margin-left: 15%;
+        border-radius: 50%;
+        .gradient;
+        .animation(hue 60s infinite linear);
+
+        svg {
+          fill: #FFF;
+          width: 100%;
+          margin: auto;
+        }
+      }
+
+      .text {
+        padding: 0.5em;
+        text-align: center;
+      }
+    }
   }
 }

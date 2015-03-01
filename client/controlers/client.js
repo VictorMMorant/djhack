@@ -1,10 +1,11 @@
+
 Template.client.helpers({
 	songs : function() {
 		return Songs.find({ partyId: Session.get("partyId"), archived: false, alreadyPlayed: false }, {sort:[["votesCount", "desc"]]}).map(function(song) {
           song.swipable = !song.isPlaying && !Votes.findOne({userId: Session.get('userId'), songId: song._id});
-          song.width = Math.min(50, Math.abs(song.votesCount) / 15);
+          song.width = Math.min(50, Math.abs(song.votesCount) * 50 / 15);
           song.left = song.votesCount < 0 ? 50 - song.width : 50;
-          song.left = song.votesCount < 0 ? "#ED5565" : "#A0D468";
+          song.color = song.votesCount < 0 ? "#ED5565" : "#A0D468";
           return song;
         });
 	}

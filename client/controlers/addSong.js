@@ -58,6 +58,11 @@ Template.addSong.helpers({
 });
 
 Template.addSong.events({
+  "click .back": function(e) {
+    e.preventDefault();
+    Session.set("query", null);
+    Session.set("page", "client");
+  },
   "input #query": function (e) {
     e.preventDefault();
     Session.set("query", e.currentTarget.value);

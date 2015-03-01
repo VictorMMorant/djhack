@@ -1,3 +1,5 @@
+
+
 Session.set("page", "home");
 Session.set("userId",  Session.get("userId") || new Mongo.ObjectID().toHexString());
 
