@@ -59,15 +59,15 @@ Meteor.methods({
 			throw new Meteor.Error("votingError", "You already have voted.");
 		}
 	},
-	addSong : function(userId, partyId, youtubeId, title, description, thumbnail) {	
+	addSong : function(userId, partyId, youtubeId, title, thumbnail) {
 		check(userId, String);
 		check(partyId, String);
 		check(youtubeId, String);
 		check(title, String);
-		check(description, String);
 		check(thumbnail, String);
 
 		var song = Songs.findOne({ youtubeId: youtubeId});
+
 		if(song) {
 			//Upvote it
 			return Meteor.call("vote",userId,song._id,1); // NO Callback synchronous
@@ -77,7 +77,6 @@ Meteor.methods({
               partyId: partyId,
               youtubeId: youtubeId,
               title: title,
-              description: description,
               thumbnail: thumbnail,
               archived: false,
               isPlaying: false,

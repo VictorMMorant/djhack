@@ -57,26 +57,25 @@ Template.addSong.helpers({
 });
 
 Template.addSong.events({
-  "input #query": function (e, t) {
+  "input #query": function (e) {
     e.preventDefault();
     Session.set("query", e.currentTarget.value);
   },
-  "submit": function (e, t) {
+  "submit": function (e) {
     e.preventDefault();
   },
   "click .song": function (e, t) {
     e.preventDefault();
 
+    var song = songsList.get()[e.currentTarget.id];
 
-    Meteor.call("addSong", t.find("#title").value, t.find("#thumbnail").src, function (error, result) {
+    Meteor.call("addSong", Session.get('userId'), Session.get('partyId'), song.id, song.title, song.image, function (error) {
       if (error) {
         console.log("Can't add the song", error);
       } else {
         Session.set("page", "client");
       }
     });
-
-
 
   }
 

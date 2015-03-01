@@ -19,11 +19,9 @@ Songs.allow({
 {
 	_id,
 	partyId,
-	//youtubeId,
+	youtubeId,
 	archived,
 	title,
-	description,
-	//artist,
 	thumbnail,
 	isPlaying,
 	alreadyPlayed,
