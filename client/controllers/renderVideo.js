@@ -5,15 +5,18 @@ Template.server.rendered = function () {
     a.src = 'https:' + '//s.ytimg.com/yts/jsbin/www-widgetapi-vfldTtH0_/www-widgetapi.js';
     $("head").append(a);
   });
-  yt = new YTPlayer("player", {
-    height: "0",
-    width: "0"
-  });
-  
+
+  window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player('player', {
+      height: '0',
+      width: '0',
+      events: { 'onReady': function() { Session.set('videoReady', true); } }
+    });
+  };
+
   this.autorun(pickNextSong);
   this.autorun(handlePlaying);
   this.autorun(handlePlayerEvents);
-
   this.autorun(updateTimer);
 
   jQuery('#qr-code').qrcode({
@@ -41,19 +44,16 @@ var pickNextSong = function () {
 
 var handlePlaying = function () {
   var yt_id = Session.get('videoId');
-  if (yt_id && yt.ready() && Session.get('isPlaying')) {
-    yt.player.setPlaybackQuality('small');
-    yt.player.loadVideoById(yt_id);
+  if (yt_id  && Session.get('isPlaying')) {
+    player.setPlaybackQuality('small');
+    player.loadVideoById(yt_id);
     Meteor.call('playing', Session.get('partyId'), Session.get('currentSongId'));
   }
 };
 
 var handlePlayerEvents = function () {
-  if (yt.ready()) {
-    yt.player.addEventListener('onStateChange', onPlayerStateChange);
-  }
+    player.addEventListener('onStateChange', onPlayerStateChange);
 };
-
 
 String.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10); // don't forget the second param
@@ -69,15 +69,14 @@ String.prototype.toHHMMSS = function () {
 };
 
 var updateTimer = function () {
-  setInterval(function(){
-      Session.set('time', yt.player.getCurrentTime().toString().toHHMMSS());
-  }, 1000);
+  if(Session.get('videoReady')){
+    setInterval(function(){
+          Session.set('time', player.getCurrentTime().toString().toHHMMSS());
+    }, 1000);
+  }
 };
 
-
-
 function onPlayerStateChange(event) {
-
     switch(event.data){
       case YT.PlayerState.ENDED:
         Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err) {

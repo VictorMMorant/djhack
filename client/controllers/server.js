@@ -1,5 +1,6 @@
 Template.server.created = function () {
   Session.set('isPlaying', false);
+  Session.set('videoReady', false);
   Session.set('currentSongId', null);
   Session.set('videoId', null);
 };
@@ -21,11 +22,12 @@ Template.server.helpers({
 
 Template.server.events({
   'click #play': function () {
-    if(yt)
+    if(player)
     {
-      if(Session.get('isPlaying'))
-        yt.player.pauseVideo();
-      else yt.player.playVideo();
+      if(Session.get('isPlaying')){
+        player.pauseVideo();
+      }
+      else{ player.playVideo(); }
       Session.set('isPlaying', !Session.get('isPlaying'));
     }
   },
@@ -47,10 +49,10 @@ Template.server.events({
         else {
           //Reload iframe with new youtube video id
           Session.set('currentSongId', null);
-          if(yt)
+          if(player)
           {
             if(Session.get('isPlaying'))
-              yt.player.pauseVideo();
+              player.pauseVideo();
             Session.set('isPlaying', false);
           }
         }
