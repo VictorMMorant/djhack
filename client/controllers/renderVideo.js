@@ -71,7 +71,9 @@ String.prototype.toHHMMSS = function () {
 var updateTimer = function () {
   if(Session.get('videoReady')){
     setInterval(function(){
-          Session.set('time', player.getCurrentTime().toString().toHHMMSS());
+      var currentTime = player.getCurrentTime();
+      if(currentTime)
+          Session.set('time', currentTime.toString().toHHMMSS());
     }, 1000);
   }
 };
