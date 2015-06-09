@@ -27,7 +27,11 @@ Template.server.events({
       if(Session.get('isPlaying')){
         player.pauseVideo();
       }
-      else{ player.playVideo(); }
+      else{ 
+        player.unMute(); 
+        player.setVolume(80);
+        player.playVideo(); 
+      }
       Session.set('isPlaying', !Session.get('isPlaying'));
     }
   },
