@@ -3,6 +3,7 @@ Template.server.created = function () {
   Session.set('videoReady', false);
   Session.set('currentSongId', null);
   Session.set('videoId', null);
+  Session.set('shouldLoadSong', true);
 };
 
 Template.server.helpers({
@@ -40,9 +41,13 @@ Template.server.events({
     Meteor.call('alreadyPlayed', Session.get('partyId'), Session.get('currentSongId'), function (err) {
         if (err) console.log(err);
         else {
-          //Reload iframe with new youtube video id 
+          //Reload iframe with new youtube video id
+          Session.set('time', '00:00');
           Session.set('currentSongId', null);
+          Session.set('shouldLoadSong', true);
+          Session.set('videoReady', false);
           Session.set('videoId', null);
+
         }
       });
   },

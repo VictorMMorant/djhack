@@ -45,8 +45,13 @@ var pickNextSong = function () {
 var handlePlaying = function () {
   var yt_id = Session.get('videoId');
   if (yt_id  && Session.get('isPlaying')) {
-    player.setPlaybackQuality('small');
-    player.loadVideoById(yt_id);
+    
+    if(Session.get('shouldLoadSong')){
+      player.setPlaybackQuality('small');
+      player.loadVideoById(yt_id);
+      Session.set('shouldLoadSong', false);
+      Session.set('videoReady', true);
+    }
     Meteor.call('playing', Session.get('partyId'), Session.get('currentSongId'));
   }
 };
@@ -68,13 +73,22 @@ String.prototype.toHHMMSS = function () {
     return time;
 };
 
+var refreshIntervalId = null;
+
 var updateTimer = function () {
-  if(Session.get('videoReady')){
-    setInterval(function(){
-      var currentTime = player.getCurrentTime();
-      if(currentTime)
+  if(Session.get('videoReady') && Session.get('isPlaying')){
+    if(refreshIntervalId == null){
+      refreshIntervalId = setInterval(function(){
+        var currentTime = player.getCurrentTime();
+        if(currentTime)
           Session.set('time', currentTime.toString().toHHMMSS());
-    }, 1000);
+      }, 1000);
+    }
+  } 
+  else if(Session.get('shouldLoadSong')){ 
+    clearInterval(refreshIntervalId);
+    refreshIntervalId = null;
+    Session.set('time', '00:00'); 
   }
 };
 
@@ -85,10 +99,19 @@ function onPlayerStateChange(event) {
           if(err) console.log(err);
           else{
             //Reload iframe with new youtube video id 
+            Session.set('time', '00:00'); 
             Session.set('currentSongId', null);
             Session.set('videoId', null);
+            Session.set('shouldLoadSong', true);
           }
         });
         break;
+        case YT.PlayerState.PAUSED:
+          console.log('Player paused...');
+          Session.set('isPlaying', false);
+          break;
+        case YT.PlayerState.PLAYING:
+          console.log('Player playing...');
+          Session.set('isPlaying', true);
     }
 }
