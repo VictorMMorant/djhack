@@ -10,13 +10,15 @@ Template.server.rendered = function () {
     player = new YT.Player('player', {
       height: '0',
       width: '0',
-      events: { 'onReady': function() { Session.set('videoReady', true); } }
+      events: { 
+        'onReady': function() { Session.set('videoReady', true); },
+        'onStateChange' : onPlayerStateChange
+       }
     });
   };
 
   this.autorun(pickNextSong);
   this.autorun(handlePlaying);
-  this.autorun(handlePlayerEvents);
   this.autorun(updateTimer);
 
   jQuery('#qr-code').qrcode({
@@ -54,10 +56,6 @@ var handlePlaying = function () {
     }
     Meteor.call('playing', Session.get('partyId'), Session.get('currentSongId'));
   }
-};
-
-var handlePlayerEvents = function () {
-    player.addEventListener('onStateChange', onPlayerStateChange);
 };
 
 String.prototype.toHHMMSS = function () {
@@ -107,11 +105,9 @@ function onPlayerStateChange(event) {
         });
         break;
         case YT.PlayerState.PAUSED:
-          console.log('Player paused...');
           Session.set('isPlaying', false);
           break;
         case YT.PlayerState.PLAYING:
-          console.log('Player playing...');
           Session.set('isPlaying', true);
     }
 }
