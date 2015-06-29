@@ -5,9 +5,9 @@
 # but you can also edit it by hand.
 
 meteor-platform
-less
 reactive-var
 chriswessels:hammer
 hpx7:youtube-iframe-player
 mrt:qr-scanner
 steeve:jquery-qrcode
+flemay:less-autoprefixer

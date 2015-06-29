@@ -1,5 +1,6 @@
 Session.set("page", "home");
-Session.set("userId",  Session.get("userId") || new Mongo.ObjectID().toHexString());
+Session.set("userId",  Session.get("userId") ||
+  new Mongo.ObjectID().toHexString());
 
 UI.body.rendered = function() {
   var id = location.hash.substring(2);

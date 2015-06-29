@@ -2,14 +2,12 @@ Songs = new Mongo.Collection("songs");
 
 Songs.allow({
 	insert: function(userId, doc) {
-		check(doc.partyId, ObjectId);
-		return !Songs.findOne({ partyId : doc.partyId, archived: { $exists : false }});	
+		return !Songs.findOne({partyId : doc.partyId, archived: {$exists : false}});
 	},
-	update: function(userId, doc ,fields,modifier) {
-		check(doc.songId, ObjectId);
+	update: function() {
 		return false;
 	},
-	remove: function(userId, doc) {
+	remove: function() {
 		return false;
 	}
 });

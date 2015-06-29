@@ -2,13 +2,12 @@ Votes = new Mongo.Collection("votes");
 
 Votes.allow({
 	insert: function(userId, doc) {
-		check(doc.partyId, ObjectId);
-		return !Votes.findOne({userId: doc.userId, songId: doc.songId});	
+		return !Votes.findOne({userId: doc.userId, songId: doc.songId});
 	},
-	update: function(userId, doc ,fields,modifier) {
+	update: function() {
 		return false;
 	},
-	remove: function(userId, doc) {
+	remove: function() {
 		return false;
 	}
 });

@@ -3,12 +3,12 @@ Parties = new Mongo.Collection("parties");
 Parties.allow({
 	insert: function(userId, doc) {
 		check(doc.name, String);
-		return !Parties.findOne({ name : doc.name});	
+		return !Parties.findOne({name : doc.name});
 	},
-	update: function(userId, doc ,fields,modifier) {
+	update: function() {
 		return false;
 	},
-	remove: function(userId, doc) {
+	remove: function() {
 		return false;
 	}
 });
