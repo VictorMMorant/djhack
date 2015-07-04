@@ -1,3 +1,5 @@
+/* globals Votes: true */
+
 Votes = new Mongo.Collection("votes");
 
 Votes.allow({

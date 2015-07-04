@@ -2,7 +2,7 @@
 /* globals Songs: false */
 /* globals YT: false */
 
-Template.server.rendered = function() {
+Template.server.onRendered(function() {
   $(document).ready(function() {
     var a = document.createElement('script');
     a.id = 'www-widgetapi-script';
@@ -28,7 +28,7 @@ Template.server.rendered = function() {
   $('#qr-code').qrcode({
     text: "http://dj2.meteor.com/#/" + Session.get('partyId')
   });
-};
+});
 
 var pickNextSong = function() {
   var song = Songs.findOne({
@@ -79,9 +79,9 @@ var toHHMMSS = function(s) {
 
 var refreshIntervalId = null;
 
-var updateTimer = function() {
+function updateTimer() {
   if (Session.get('videoReady') && Session.get('isPlaying')) {
-    if (refreshIntervalId === null) {
+    if (!refreshIntervalId) {
       refreshIntervalId = setInterval(function() {
         var currentTime = window.player.getCurrentTime();
         if (currentTime) {
@@ -94,29 +94,29 @@ var updateTimer = function() {
     refreshIntervalId = null;
     Session.set('time', '00:00');
   }
-};
+}
 
 function onPlayerStateChange(event) {
-    switch (event.data) {
-      case YT.PlayerState.ENDED:
-        Meteor.call('alreadyPlayed',
-          Session.get('partyId'),
-          Session.get('currentSongId'), function(err) {
-          if (err) {
-            console.log(err);
-          } else {
-            //Reload iframe with new youtube video id
-            Session.set('time', '00:00');
-            Session.set('currentSongId', null);
-            Session.set('videoId', null);
-            Session.set('shouldLoadSong', true);
-          }
-        });
+  switch (event.data) {
+    case YT.PlayerState.ENDED:
+      Meteor.call('alreadyPlayed',
+        Session.get('partyId'),
+        Session.get('currentSongId'), function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          //Reload iframe with new youtube video id
+          Session.set('time', '00:00');
+          Session.set('currentSongId', null);
+          Session.set('videoId', null);
+          Session.set('shouldLoadSong', true);
+        }
+      });
+      break;
+      case YT.PlayerState.PAUSED:
+        Session.set('isPlaying', false);
         break;
-        case YT.PlayerState.PAUSED:
-          Session.set('isPlaying', false);
-          break;
-        case YT.PlayerState.PLAYING:
-          Session.set('isPlaying', true);
-    }
+      case YT.PlayerState.PLAYING:
+        Session.set('isPlaying', true);
+  }
 }

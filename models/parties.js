@@ -1,3 +1,5 @@
+/* globals Parties: true */
+
 Parties = new Mongo.Collection("parties");
 
 Parties.allow({

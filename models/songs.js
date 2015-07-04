@@ -1,3 +1,5 @@
+/* globals Songs: true */
+
 Songs = new Mongo.Collection("songs");
 
 Songs.allow({
