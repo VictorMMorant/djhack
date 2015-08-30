@@ -55,15 +55,15 @@
 
     .upvoted, & .downvoted {
       display: block;
-      position: absolute;
+      position: relative;
       height: 44px;
       width: 44px;
-      right: 5%;
-      z-index: -1;
+      z-index: 10;
       background: @success-color;
       .animation(none);
       .translate(0, -51px);
       fill: @inverse-color;
+      float:right;
     }
 
     svg {
