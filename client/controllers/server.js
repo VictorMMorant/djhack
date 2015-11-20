@@ -7,6 +7,7 @@ Template.server.created = function() {
   Session.set('currentSongId', null);
   Session.set('videoId', null);
   Session.set('shouldLoadSong', true);
+  Session.set('curretPausedSongTime', null);
 };
 
 Template.server.helpers({
@@ -25,14 +26,28 @@ Template.server.helpers({
   }
 });
 
+function timeToSeconds(str) {
+    var p = str.split(':'),
+        s = 0, m = 1;
+    while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+    }
+    return s;
+}
+
 Template.server.events({
   'click #play': function() {
     if (window.player) {
       if (Session.get('isPlaying')) {
+        Session.set('currentPausedSongTime', timeToSeconds(Session.get('time')));
         window.player.pauseVideo();
       } else {
         window.player.unMute();
         window.player.setVolume(80);
+        if(Session.get('currentPausedSongTime')){
+            window.player.seekTo(Session.get('currentPausedSongTime'), false);
+        }
         window.player.playVideo();
       }
       Session.set('isPlaying', !Session.get('isPlaying'));
