@@ -1,18 +1,20 @@
 /* globals Parties: true */
 
-Parties = new Mongo.Collection("parties");
+Parties = new Mongo.Collection('parties');
 
 Parties.allow({
-	insert: function(userId, doc) {
+	insert(userId, doc) {
 		check(doc.name, String);
-		return !Parties.findOne({name : doc.name});
+		return !Parties.findOne({
+			name: doc.name,
+		});
 	},
-	update: function() {
+	update() {
 		return false;
 	},
-	remove: function() {
+	remove() {
 		return false;
-	}
+	},
 });
 
 /*

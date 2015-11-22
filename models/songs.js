@@ -1,17 +1,22 @@
 /* globals Songs: true */
 
-Songs = new Mongo.Collection("songs");
+Songs = new Mongo.Collection('songs');
 
 Songs.allow({
-	insert: function(userId, doc) {
-		return !Songs.findOne({partyId : doc.partyId, archived: {$exists : false}});
+	insert(userId, doc) {
+		return !Songs.findOne({
+			partyId: doc.partyId,
+			archived: {
+				$exists: false,
+			},
+		});
 	},
-	update: function() {
+	update() {
 		return false;
 	},
-	remove: function() {
+	remove() {
 		return false;
-	}
+	},
 });
 
 /*

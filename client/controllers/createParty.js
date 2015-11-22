@@ -1,15 +1,16 @@
 Template.createParty.events({
-	"submit #createParty" : function(e, t) {
-		e.preventDefault();
+	'submit #createParty': (event, templateInstance) => {
+		event.preventDefault();
 
-		Meteor.call("createParty", t.find("#partyName").value,
-			t.find("#partyPassword").value, function(error, result) {
-			if (error) {
-				console.log("Can't create party ", error);
-			} else {
-				Session.set("page", "server");
-				Session.set("partyId", result);
-			}
-		});
-	}
+		Meteor.call('createParty', templateInstance.find('#partyName').value,
+			templateInstance.find('#partyPassword').value,
+			(error, result) => {
+				if (error) {
+					console.log("Can't create party ", error);
+				} else {
+					Session.set('page', 'server');
+					Session.set('partyId', result);
+				}
+			});
+	},
 });

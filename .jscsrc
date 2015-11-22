@@ -1,8 +1,0 @@
-{
-  "esprima": "esprima-fb",
-  "fileExtensions": [".js", ".jsx"],
-  "preset": "google",
-  "validateQuoteMarks": null,
-  "validateIndentation": null,
-  "requireCamelCaseOrUpperCaseIdentifiers": null
-}

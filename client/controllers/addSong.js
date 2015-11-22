@@ -1,81 +1,82 @@
-/* globals gapi: false */
+/* global gapi */
 
-var songsList = new ReactiveVar([], function(a, b) {
-  if (a === b) {return true;}
-  if (!a || !b) {return false;}
-  if (a.length !== b.length) {return false;}
-  for (var i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) {return false;}
+const songsList = new ReactiveVar([], (a, b) => {
+  if (a === b) {
+    return true;
   }
-  return true;
+  if (!a || !b) {
+    return false;
+  }
+  if (a.length !== b.length) {
+    return false;
+  }
+  return a.every((x, i) => x === b[i]);
 });
 
-var apiCall = function() {
-  if (Session.get("query")) {
-    gapi.client.load('youtube', 'v3', function() {
-
-      var request = gapi.client.youtube.search.list({
-        q: Session.get("query"),
+function apiCall() {
+  if (Session.get('query')) {
+    gapi.client.load('youtube', 'v3', () => {
+      const request = gapi.client.youtube.search.list({
+        q: Session.get('query'),
         part: 'snippet',
         type: 'video',
         fields: 'items(id,snippet)',
-        key: 'AIzaSyBt0EpIzbUteYvSET-nkDBX2fJgpC6xRfY'
+        key: 'AIzaSyBt0EpIzbUteYvSET-nkDBX2fJgpC6xRfY',
       });
 
-      request.execute(function(response) {
-        var newArr = response.items.filter(function(element) {
-          return element.id !== undefined;
-        }).map(function(element, i) {
-          return {
-            index: i,
-            id: element.id.videoId,
-            title: element.snippet.title,
-            image: element.snippet.thumbnails.medium.url
-          };
-        });
-        songsList.set(newArr);
+      request.execute(response => {
+        const newSongsList = response.items
+          .filter(x => x.id !== undefined)
+          .map((song, index) => {
+            return {
+              index,
+              id: song.id.videoId,
+              title: song.snippet.title,
+              image: song.snippet.thumbnails.medium.url,
+            };
+          });
+        songsList.set(newSongsList);
       });
     });
   }
-};
+}
 
-Template.addSong.rendered = function() {
+Template.addSong.onRendered(function rendered() {
   this.autorun(apiCall);
-};
+});
 
 Template.addSong.helpers({
-  youtubeSongs: function() {
+  youtubeSongs() {
     return songsList.get();
-
-  }
+  },
 });
 
 Template.addSong.events({
-  "click .back": function(e) {
-    e.preventDefault();
-    Session.set("query", null);
-    Session.set("page", "client");
+  'click .back': (event) => {
+    event.preventDefault();
+    Session.set('query', null);
+    Session.set('page', 'client');
   },
-  "input #query": function(e) {
-    e.preventDefault();
-    Session.set("query", e.currentTarget.value);
+  'input #query': (event) => {
+    event.preventDefault();
+    Session.set('query', event.currentTarget.value);
   },
-  "submit": function(e) {
-    e.preventDefault();
+  'submit': (event) => {
+    event.preventDefault();
   },
-  "click .song": function(e) {
-    e.preventDefault();
-    var song = songsList.get()[e.currentTarget.id];
+  'click .song': (event) => {
+    event.preventDefault();
+    const song = songsList.get()[event.currentTarget.id];
     if (song) {
-      Meteor.call("addSong", Session.get('userId'), Session.get('partyId'),
-       song.id, song.title, song.image, function(error) {
-        if (error) {
-          console.log("Can't add the song", error);
-        } else {
-          Session.set("query", null);
-          Session.set("page", "client");
-        }
-      });
+      Meteor.call('addSong', Session.get('userId'), Session.get('partyId'),
+        song.id, song.title, song.image, (error) => {
+          if (error) {
+            console.log("Can't add the song", error);
+          } else {
+            Session.set('query', null);
+            Session.set('page', 'client');
+          }
+        });
     }
-  }
+  },
 });

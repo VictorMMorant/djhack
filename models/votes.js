@@ -1,17 +1,20 @@
 /* globals Votes: true */
 
-Votes = new Mongo.Collection("votes");
+Votes = new Mongo.Collection('votes');
 
 Votes.allow({
-	insert: function(userId, doc) {
-		return !Votes.findOne({userId: doc.userId, songId: doc.songId});
+	insert(userId, doc) {
+		return !Votes.findOne({
+			userId: doc.userId,
+			songId: doc.songId,
+		});
 	},
-	update: function() {
+	update() {
 		return false;
 	},
-	remove: function() {
+	remove() {
 		return false;
-	}
+	},
 });
 
 /*

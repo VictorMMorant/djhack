@@ -1,32 +1,29 @@
-/* globals Parties: false */
-/* globals Songs: false */
-/* globals Votes: false */
-Meteor.publish("party", function(partyId) {
-  if (partyId) {
-    return Parties.find(partyId);
-  } else {
-    this.ready();
-  }
+/* globals Parties, Songs, Votes */
+
+Meteor.publish('party', function partyPublication(partyId) {
+  check(partyId, Match.OneOf(String, Meteor.Collection.ObjectID, null, undefined));
+	if (partyId) {
+		return Parties.find(partyId);
+	}
+	this.ready();
 });
 
-Meteor.publish("songs", function(partyId) {
-  if (partyId) {
-    return Songs.find({
-      partyId: partyId,
-      archived: false
-    });
-
-  } else {
-    this.ready();
-  }
+Meteor.publish('songs', function songsPublication(partyId) {
+  check(partyId, Match.OneOf(String, Meteor.Collection.ObjectID, null, undefined));
+	if (partyId) {
+		return Songs.find({
+			partyId,
+			archived: false,
+		});
+	}
+	this.ready();
 });
 
-Meteor.publish("votes", function(partyId, userId) {
-  if (partyId) {
-    return Votes.find({
-      userId: userId
-    });
-  } else {
-    this.ready();
-  }
+Meteor.publish('votes', function votesPublication(partyId, userId) {
+  check(partyId, Match.OneOf(String, Meteor.Collection.ObjectID, null, undefined));
+  check(userId, Match.OneOf(String, null, undefined));
+	if (partyId) {
+		return Votes.find({userId});
+	}
+	this.ready();
 });

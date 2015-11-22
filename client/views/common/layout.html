@@ -5,13 +5,13 @@
 </head>
 <body>
   <div class="background"></div>
-	{{#if pageClient}}
+	{{#if page "client"}}
 		{{> client}}
-	{{else}}{{#if pageServer}}
+	{{else}}{{#if page "server"}}
 		{{> server}}
-	{{else}}{{#if pageCreateParty}}
+	{{else}}{{#if page "createParty"}}
 		{{> createParty}}
-	{{else}}{{#if pageAddSong}}
+	{{else}}{{#if page "addSong"}}
 		{{> addSong}}
 	{{else}}
 		{{> home}}
